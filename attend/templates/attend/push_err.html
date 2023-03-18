@@ -1,0 +1,19 @@
+{% extends 'attend/base.html' %}
+{% block content %}
+    <div class="container">
+        <form method="post" action="{% url 'attend:result_err' %}">
+            {% csrf_token %}
+            <h3 style="padding-top: 20px; padding-bottom: 20px;"">打刻エラーです。</h3>
+            <div class="container"><h4>原因1. 打刻忘れ</h4>
+            <ul>出勤/退勤打刻を忘れていた。</ul>
+            <h4>原因2. 打刻ミス</h4>
+            <ul>出勤(退勤)打刻をしなければならないのに退勤(出勤)打刻をしてしまった。</ul>
+            <h3 style="color:blue">打刻エラーの原因はどちらですか？</h3>
+            </div>
+            <h2 style="padding:30px"><input type="hidden" name="err_cause">
+                {{ form_err.err_cause }}
+            </h2>
+            <p><input class="btn btn-primary" type="submit" value="送信" id="submit"></p>
+        </form>
+    </div>
+{% endblock %}

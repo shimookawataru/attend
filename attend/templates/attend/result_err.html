@@ -1,0 +1,22 @@
+{% extends 'attend/base.html' %}
+
+{% block content %}
+{% if select == 2 %}
+<div class="container">
+    <h3 style="padding: 20px;"">{{ comment }}</h3>
+    <p><a href="/">戻る</a></p>
+    <p><a href="../accounts/logout/">ログアウト</a></p>
+    </div>
+{% else %}
+    <h3 style="padding: 20px;">{{ comment }}</h3>
+    <div class="container">
+        <form method="post" action="{% url 'attend:result_forget' %}">
+            {% csrf_token %}
+        <h2><input type="hidden" name="date_time_forget">
+            {{ form_forget.date_time_forget }}
+        </h2>
+        <p><input class="btn btn-primary" type="submit" value="送信" id="submit"></p>
+    </form>
+</div>
+{% endif %}
+{% endblock %}

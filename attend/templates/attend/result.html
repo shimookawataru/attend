@@ -1,0 +1,12 @@
+{% extends 'attend/base.html' %}
+{% block content %}
+<div class="container">
+    <h3 style="padding: 10px;">{{ comment }}</h3>
+    {% if comment_add %}
+    <h3 style="color:red; padding-left: 10px;">{{ comment_add }}</h3>
+    {% endif %}
+    <br>
+    <p><a href="/">戻る</a></p>
+    <p><a href="../accounts/logout/">ログアウト</a></p>
+</div>
+{% endblock  %}

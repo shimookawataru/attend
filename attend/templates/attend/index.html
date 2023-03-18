@@ -1,0 +1,50 @@
+{% extends "attend/base.html" %}
+{% block content %}
+
+    {% if user.is_authenticated %}
+        <div class="container">
+            <form method="post" action="{% url 'attend:result' %}" onsubmit="return beforeSubmit()">
+            {% csrf_token %}
+                <h2 style="padding-top: 20px;">XX社勤怠管理システム</h2>
+                <h3>{{  user  }} さん</h3>
+                {% if user.is_superuser %}
+                <p>管理者サイトは<a href="/admin">こちら</a></p>
+                {% endif %}
+                <h3 id="time"></h3>
+                    <script>
+                    time();
+                    function time(){
+                        var now = new Date();
+                        document.getElementById("time").innerHTML = now.toLocaleString();
+                    }
+                    setInterval('time()',1000);
+                    </script>
+                <h2 style="padding: 30px;"><input type="hidden" name="in_out">
+                    {{ form.in_out }}
+                </h2>
+                <script>
+                    function beforeSubmit() {
+                      if( window.confirm("選択した内容でよろしいですか？") ) {
+                        return true;
+                      } else {
+                        return false;
+                      }
+                    }
+                  </script>
+                <p><input class="btn btn-primary" type="submit" value="送信" id="submit"></p>
+            </form>
+            <h4 style="padding-top: 30px;">直近の打刻</h4>
+            <ul>
+            {% for obj in chokkin_date %}
+              {% if obj.in_out == 1 %}
+                <li>{{ obj.date }}{{ obj.time }} {{ in_out_list.1 }}</li>
+              {% else %}
+              <li>{{ obj.date }}{{ obj.time }} {{ in_out_list.0 }}</li>
+              {% endif %}
+            {% endfor %}
+              </ul>
+            <a href="accounts/logout">&nbsp;ログアウト</a>
+        </div>
+    {% endif %}
+
+{% endblock %}

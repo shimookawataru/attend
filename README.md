@@ -74,22 +74,39 @@ pip install pandas
 
 ## Usage
 
-実行環境
+* 実行環境
 ```
 Python 3.10.9
 ```
-実行方法
+* ローカルサーバで実行する方法
 
 1. Git clone this project
 ```bash
 git clone https://github.com/shimookawataru/attend.git
 ```
-2. マイグレーションファイルを作成し、データベースに適用する。
+
+2. プロジェクト直下で以下のコマンドを実行し、秘密鍵を生成する。
+
+```bash
+python3 manage.py shell
+>>> from django.core.management.utils import get_random_secret_key
+>>> get_random_secret_key()
+'(秘密鍵)'
+```
+
+3. kintai ディレクトリの中に `local_settings.py`を作成し、先程入手した秘密鍵をコピペする。
+
+`local_settings.py`:
+```bash
+SECRET_KEY = '(秘密鍵)'
+```
+
+4. マイグレーションファイルを作成し、データベースに適用する。
 ```bash
 python3 manage.py makemigrations
 python3 manage.py migrate
 ```
-3. 管理者ユーザの情報を登録する。
+5. 管理者ユーザの情報を登録する。
 ```bash
 python3 manage.py createsuperuser
 ```
@@ -101,7 +118,7 @@ Password:
 Password (again): 
 ```
 
-4. run server
+1. run server
 ```
 python3 manage.py runserver
 ```
@@ -110,9 +127,11 @@ python3 manage.py runserver
 1. 管理者サイトにログイン
 
 2. 下図のユーザーの部分をクリック
+
 ![管理者サイトのスクリーンショット1](https://user-images.githubusercontent.com/84301337/226108785-beced5a8-3439-4d7e-82b7-a2ad8f172e26.png)
 
 3. 右上の「ユーザーを追加」の部分をクリック
+
 ![管理者サイトのスクリーンショット2](https://user-images.githubusercontent.com/84301337/226108781-3123758d-2ba8-41d4-9de8-49964fff0fa5.png)
 
 4. ユーザーIDとパスワードを入力

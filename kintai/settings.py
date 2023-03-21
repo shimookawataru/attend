@@ -48,6 +48,7 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'kintai.urls'
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+SESSION_COOKIE_AGE = 300 #5min
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')

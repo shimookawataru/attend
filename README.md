@@ -120,10 +120,15 @@ Password:
 Password (again): 
 ```
 
-1. run server
+. run server
 ```
 python3 manage.py runserver
 ```
+
+## うまくいかない場合
+- デバッグを有効にする。
+`attend/kintai/settings.py`->`DEBUG = True`
+- `python3 manage.py makemigrations`を`python3 manage.py makemigrations attend`にする。
 
 ## 管理者以外のユーザの登録方法
 1. 管理者サイトにログイン
